@@ -16,24 +16,17 @@ import {
   StatusBar,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 const App: () => React$Node = () => {
   return (
-    <>
+	<>
 		<View>
-			<Text>Bluebuddy</Text>
+			<Text>BlueBuddy</Text>
 		</View>
-    </>
+	</>
   );
 };
 
+/*
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
@@ -54,5 +47,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 });
+*/
 
 export default App;
