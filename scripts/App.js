@@ -1,52 +1,81 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 
-import React from 'react';
+import * as React from 'react';
+import { View, Text, Button, Image, StyleSheet } from 'react-native';
+import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer';
 
-const App: () => React$Node = () => {
+import Header from './components/Header';
+import Home from './components/Home';
+import FriendsList from './components/FriendsList';
+
+
+function Feed({ navigation }) {
   return (
-	<>
-		<View>
-			<Text>BlueBuddy</Text>
-		</View>
-	</>
+    <View style={styles.header}>
+      <Header/>
+    <View>
+      <Button
+        title="Menu"
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+      />
+    </View>
+    <Home/>
+    </View>
   );
-};
+}
 
-/*
+function Friends( {navigation} ) {
+  return (
+    <View>
+    <Header/>
+    <View>
+      <Button
+        title="Menu"
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+      />
+    </View>
+      <FriendsList/>
+    </View>
+  );
+}
+
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+
+    </DrawerContentScrollView>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
+      <Drawer.Screen name="Home" component={Feed} />
+      <Drawer.Screen name="Friends List" component={Friends} />
+    </Drawer.Navigator>
+  );
+}
+
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.blue,
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  header: {
+    height: 80,
+    padding: -30,
+    backgroundColor: '#003679'
+  }
 });
-*/
 
-export default App;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
+  );
+}
